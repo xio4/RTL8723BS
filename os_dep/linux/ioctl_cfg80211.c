@@ -2051,7 +2051,14 @@ void rtw_cfg80211_indicate_scan_done(_adapter *adapter, bool aborted)
 		}
 		else
 		{
-			cfg80211_scan_done(pwdev_priv->scan_request, aborted);
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0))
+            struct cfg80211_scan_info info = {
+                    .aborted = aborted,
+            };
+            cfg80211_scan_done(pwdev_priv->scan_request, &info);
+#else
+            cfg80211_scan_done(pwdev_priv->scan_request, aborted);
+#endif
 		}
 
 		pwdev_priv->scan_request = NULL;
