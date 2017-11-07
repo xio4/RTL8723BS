@@ -31,6 +31,10 @@
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,5))
 	#include <linux/kref.h>
 #endif
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4,11,0))
+	#include <linux/sched/signal.h>
+#endif
+
 	//#include <linux/smp_lock.h>
 	#include <linux/netdevice.h>
 	#include <linux/skbuff.h>
